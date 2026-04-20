@@ -9,7 +9,7 @@ contextBridge.exposeInMainWorld('api', {
         ipcRenderer.send('sendMessage', content);
     },
     //存储数据 主进程调用Node本地存储
-    storageSet: async (key: string, value: string): Promise<boolean> => {
+    storageSet: async (key: string, value: string | null): Promise<boolean> => {
         return await ipcRenderer.invoke("storageSet", key, value);
     },
     storageGet: async (key: string): Promise<string | null> => {

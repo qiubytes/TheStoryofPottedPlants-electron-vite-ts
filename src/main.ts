@@ -64,11 +64,24 @@ app.whenReady().then(() => {
     const exists = await isDirectoryExists(dataDir);
     if (!exists) {
       await fs.mkdir(dataDir);
-      console.log('创建目录:', dataDir);
+      //console.log('mkdir:', dataDir);
     } else {
-      console.log('目录已存在:', dataDir);
+      //console.log('dir exists:', dataDir);
     }
     const filepath = path.join(dataDir, key + '.txt');
+    if (value == null) {
+      try {
+        // 文件存在则删除，不存在则忽略错误（ENOENT）
+        await fs.unlink(filepath);
+      } catch (err: any) {
+        if (err.code !== 'ENOENT') {
+          console.error('删除文件失败:', err);
+          return false;
+        }
+      }
+      return true;
+    }
+
     await fs.writeFile(filepath, value, 'utf-8');
     return true;
   });
