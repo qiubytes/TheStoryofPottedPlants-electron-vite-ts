@@ -37,7 +37,7 @@ const createWindow = () => {
 
   //mainWindow.loadFile(path.join(process.cwd(), 'cocosgame', 'web-desktop', 'index.html'));
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
   //隐藏menu
   mainWindow.setMenu(null);
 };
